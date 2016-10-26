@@ -17,14 +17,14 @@
     <div id="header">
         <ul id="navbar">
             <div id="logo-left">
-                <li><a href="/museum"><span>首页</span><br/><span>HOME</span></a></li>
-                <li><a href="#exhibition"><span>网上巡展</span><br/><span>EXHIBITION</span></a></li>
-                <li><a href="#floor"><span>参观引导</span><br/><span>GUIDE</span></a></li>
+                <li><a href="{% url 'core:index' %}"><span>首页</span><br/><span>HOME</span></a></li>
+                <li><a href="{% url 'core:index' %}#exhibition"><span>网上巡展</span><br/><span>EXHIBITION</span></a></li>
+                <li><a href="{% url 'core:index' %}#floor"><span>参观引导</span><br/><span>GUIDE</span></a></li>
             </div>
             <div id="logo-right">
-                <li><a href="#news"><span>最新资讯</span><br/><span>NEWS</span></a></li>
+                <li><a href="{% url 'core:index' %}#news"><span>最新资讯</span><br/><span>NEWS</span></a></li>
                 <li><a href="/museum/part/about/18"><span>关于我们</span><br/><span>ABOUT</span></a></li>
-                <li><a href=""><span>留言板</span><br/><span>COMMENT</span></a></li>
+                <li><a href="{% url 'comment:index' %}"><span>留言板</span><br/><span>COMMENT</span></a></li>
             </div>
         </ul>
         <div id="navbar-logo">

@@ -1,0 +1,19 @@
+{% extends 'common/layout.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'core/styles/article.css'%}">
+{% endblock %}
+
+{% block main %}
+    {% if article %}
+        <div id="article">
+            <h3>{{ article.title }}</h3>
+            <hr />
+            {{ article.content|safe }}
+        </div>
+    {% else %}
+        <div id="article">
+            <h1>没有这篇文章</h1>
+        </div>
+    {% endif %}
+{% endblock %}

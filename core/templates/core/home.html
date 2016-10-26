@@ -10,18 +10,20 @@
 
 {% block main %}
     <div id="core">
-        <div id="slider">
-            <ul>
-                {% for item in sliders %}
-                    <li>
-                        {% load static %}
-                        <a href="/museum/part/slider/{{ item.id }}">
-                            <img src={{ item.thumbnail.url }} alt="slider"/>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+        {% if sliders %}
+            <div id="slider">
+                <ul>
+                    {% for item in sliders %}
+                        <li>
+                            {% load static %}
+                            <a href="/museum/part/slider/{{ item.id }}">
+                                <img src={{ item.thumbnail.url }} alt="slider"/>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         <div id="floor">
             <h2 class="part-title">
                 <span>楼层索引</span>
@@ -70,8 +72,8 @@
                 <img src="{% static 'core/images/appointment.png' %}" alt="">
             </div>
             <div id="appoint-form">
-                {% csrf_token %}
-                <form action="" method="post" target="_blank">
+                <form action="{% url 'core:appoint' %}" method="post" target="_blank">
+                    {% csrf_token %}
                     <div class="form-group">
                         <div id="form-name">
                             <input id="id_name" name="name" type="text" placeholder="团体名称"/>
