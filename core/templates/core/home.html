@@ -9,64 +9,139 @@
 {% endblock %}
 
 {% block main %}
+    {% if sliders %}
+        <section class="section is-medium">
+            <div class="container">
+                <div class="columns is-vcentered">
+                    <div class="column is-one-third">
+                        <h3 class="title is-2">最新消息</h3>
+                        <h4 class="subtitle is-4">从这里开始了解来自馆里的新消息</h4>
+                    </div>
+                    <div class="column">
+                        <ul id="slider">
+                            {% for item in sliders %}
+                                <li>
+                                    {% load static %}
+                                    <a href="/museum/part/slider/{{ item.id }}">
+                                        <img src={{ item.thumbnail.url }} alt="slider"/>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr class="is-marginless" />
+    {% endif %}
+    <section class="section is-medium">
+        <div class="container">
+            <h3 class="title is-2">楼层引导</h3>
+            <h4 class="subtitle is-4">各式文化由不同的楼层中感受到</h4>
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-primary">
+                  <div class="content">
+                    <p class="title">博物馆一层</p>
+                    <p class="subtitle">FIRST FLOOR</p>
+                    <div class="content">
+                        艺术与创意空间
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <div class="content">
+                    <p class="title">博物馆二层</p>
+                    <p class="subtitle">SECOND FLOOR</p>
+                    <div class="content">
+                        艺术与创意空间
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-danger">
+                  <div class="content">
+                    <p class="title">博物馆三层</p>
+                    <p class="subtitle">THIRD FLOOR</p>
+                    <div class="content">
+                        艺术与创意空间
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+        </div>
+    </section>
+    <section class="section is-medium">
+        <div class="container">
+            <div class="columns">
+                <div class="colums is-one-third">
+                    <h3 class="title is-2">团体预约参观</h3>
+                    <h4 class="subtitle is-4">深入探索博物馆最好的实践</h4>
+                </div>
+            </div>
+
     <div id="core">
         {% if sliders %}
-            <div id="slider">
-                <ul>
-                    {% for item in sliders %}
-                        <li>
-                            {% load static %}
-                            <a href="/museum/part/slider/{{ item.id }}">
-                                <img src={{ item.thumbnail.url }} alt="slider"/>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+{#            <div id="slider">#}
+{#                <ul>#}
+{#                    {% for item in sliders %}#}
+{#                        <li>#}
+{#                            {% load static %}#}
+{#                            <a href="/museum/part/slider/{{ item.id }}">#}
+{#                                <img src={{ item.thumbnail.url }} alt="slider"/>#}
+{#                            </a>#}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </div>#}
         {% endif %}
-        <div id="floor">
-            <h2 class="part-title">
-                <span>楼层索引</span>
-            </h2>
-            <ul>
-                <li onclick="jumpToArticle(1)">
-                    <div class="image">
-                        <div class="default-image">
-                            <span>1F</span>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <h3 class="title">博物馆一层</h3>
-                        <p class="en-title">FIRST FLOOR</p>
-                        <p class="name">艺术与创意空间</p>
-                    </div>
-                </li>
-                <li onclick="jumpToArticle(2)">
-                    <div class="image">
-                        <div class="default-image">
-                            <span>2F</span>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <h3 class="title">博物馆二层</h3>
-                        <p class="en-title">SECOND FLOOR</p>
-                        <p class="name">临时展厅A</p>
-                    </div>
-                </li>
-                <li onclick="jumpToArticle(3)">
-                    <div class="image">
-                        <div class="default-image">
-                            <span>3F</span>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <h3 class="title">博物馆三层</h3>
-                        <p class="en-title">THIRD FLOOR</p>
-                        <p class="name">临时展厅B</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
+{#        <div id="floor">#}
+{#            <h2 class="part-title">#}
+{#                <span>楼层索引</span>#}
+{#            </h2>#}
+{#            <ul>#}
+{#                <li onclick="jumpToArticle(1)">#}
+{#                    <div class="image">#}
+{#                        <div class="default-image">#}
+{#                            <span>1F</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h3 class="title">博物馆一层</h3>#}
+{#                        <p class="en-title">FIRST FLOOR</p>#}
+{#                        <p class="name">艺术与创意空间</p>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li onclick="jumpToArticle(2)">#}
+{#                    <div class="image">#}
+{#                        <div class="default-image">#}
+{#                            <span>2F</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h3 class="title">博物馆二层</h3>#}
+{#                        <p class="en-title">SECOND FLOOR</p>#}
+{#                        <p class="name">临时展厅A</p>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li onclick="jumpToArticle(3)">#}
+{#                    <div class="image">#}
+{#                        <div class="default-image">#}
+{#                            <span>3F</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h3 class="title">博物馆三层</h3>#}
+{#                        <p class="en-title">THIRD FLOOR</p>#}
+{#                        <p class="name">临时展厅B</p>#}
+{#                    </div>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
         <div id="appointment">
             <div id="appoint-banner">
                 <img src="{% static 'core/images/appointment.png' %}" alt="">

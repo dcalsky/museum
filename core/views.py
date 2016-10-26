@@ -12,8 +12,8 @@ MAX_ITEMS = 10
 
 def index(request):
     news = Article.objects.filter(part__name='news').order_by('create_time')[:5] or []
-    sliders = Article.objects.filter(part__name='sliders').order_by('create_time')[:5] or []
-    exhibitions = Article.objects.filter(part__name='exhibitions').order_by('create_time')[:4] or []
+    sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:5] or []
+    exhibitions = Article.objects.filter(part__name='exhibition').order_by('create_time')[:4] or []
 
     return render(request, 'core/home.html', {
         'news': news,
@@ -53,7 +53,7 @@ def article(request, article_id):
     })
 
 
-def part(request, part_name, page):
+def part(request, part_name):
     page = request.GET.get('page') or 1
     articles = Article.objects.filter(part__name=part_name)
     paginator = Paginator(articles, MAX_ITEMS)
