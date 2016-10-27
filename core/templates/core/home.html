@@ -10,12 +10,13 @@
 
 {% block main %}
     {% if sliders %}
+
         <section class="section is-medium">
             <div class="container">
                 <div class="columns is-vcentered">
                     <div class="column is-one-third">
-                        <h3 class="title is-2">最新消息</h3>
-                        <h4 class="subtitle is-4">从这里开始了解来自馆里的新消息</h4>
+                        {% include 'core/_title.html' with title='近期消息' %}
+                        {% include 'core/_subtitle.html' with subtitle='从这里开始了解来自馆内的新消息' %}
                     </div>
                     <div class="column">
                         <ul id="slider">
@@ -34,10 +35,50 @@
         </section>
         <hr class="is-marginless" />
     {% endif %}
+    {% if news %}
+        <section class="section is-medium">
+            <div class="container">
+                <div class="columns is-vcentered">
+                    <div class="column is-one-third">
+                        <a href="{% url 'core:part' 'news' %}">
+                            {% include 'core/_title.html' with title='近期消息' %}
+                        </a>
+                        {% include 'core/_subtitle.html' with subtitle='从这里开始了解来自馆内的新消息' %}
+                    </div>
+                    <div class="column">
+                        <div class="columns">
+                            {% for item in news %}
+                                <div class="card column is-4">
+                                  <header class="card-header">
+                                    <p class="card-header-title">
+                                      {{ item.title }}
+                                    </p>
+                                  </header>
+                                  <div class="card-content">
+                                    <div class="content">
+                                        {{ item.desc }}
+                                      <br>
+                                      <small>{{ item.create_time }}</small>
+                                    </div>
+                                  </div>
+                                  <footer class="card-footer">
+                                    <a class="card-footer-item">进入页面</a>
+                                  </footer>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr class="is-marginless" />
+    {% endif %}
     <section class="section is-medium">
         <div class="container">
-            <h3 class="title is-2">楼层引导</h3>
-            <h4 class="subtitle is-4">各式文化由不同的楼层中感受到</h4>
+            <a href="{% url 'core:part' 'guide' %}">
+                {% include 'core/_title.html' with title='楼层引导' %}
+            </a>
+            {% include 'core/_subtitle.html' with subtitle='各式文化由不同的楼层中感受到' %}
             <div class="tile is-ancestor">
               <div class="tile is-parent">
                 <article class="tile is-child notification is-primary">
@@ -75,15 +116,117 @@
             </div>
         </div>
     </section>
+    <hr class="is-marginless" />
     <section class="section is-medium">
         <div class="container">
             <div class="columns">
-                <div class="colums is-one-third">
-                    <h3 class="title is-2">团体预约参观</h3>
-                    <h4 class="subtitle is-4">深入探索博物馆最好的实践</h4>
+                <div class="column is-one-third">
+                    {% include 'core/_title.html' with title='预约参观' %}
+                    {% include 'core/_subtitle.html' with subtitle='深入探索博物馆最好的实践' %}
+                </div>
+                <div class="column">
+                    <form action="{% url 'core:appoint' %}" method="post" target="_blank" class="control " >
+                        {% csrf_token %}
+                        <div class="control is-horizontal">
+                          <div class="control-label">
+                            <label class="label">基本信息</label>
+                          </div>
+                          <div class="control is-grouped">
+                            <p class="control is-expanded">
+                              <input class="input" type="text" placeholder="团体名称">
+                            </p>
+                            <p class="control is-expanded">
+                              <input class="input" type="text" placeholder="参观人数">
+                            </p>
+                          </div>
+                        </div>
+                        <div class="control is-horizontal">
+                          <div class="control-label">
+                            <label class="label">参观时间</label>
+                          </div>
+                          <div class="control is-fullwidth">
+                              <input class="input" type="text" placeholder="您的参观时间对此次接待十分重要">
+                          </div>
+                        </div>
+                        <div class="control is-horizontal">
+                          <div class="control-label">
+                            <label class="label">详细信息</label>
+                          </div>
+                          <div class="control">
+                            <textarea class="textarea" id="id_note" name="note" placeholder="请告诉我们更多您此次的安排详情(具体时间等)"></textarea>
+                          </div>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
+    </section>
+    <hr class="is-marginless" />
+    {% if exhibitions %}
+        <section class="section is-medium">
+            <div class="container">
+                <a href="{% url 'core:part' 'exhibition' %}">
+                    {% include 'core/_title.html' with title='网上巡展' %}
+                </a>
+                {% include 'core/_subtitle.html' with subtitle='在互联网文化中带来全新的体验' %}
+                <div class="columns">
+                    {% for item in exhibitions %}
+                        <div class="column is-3">
+                            <div class="card">
+                              <div class="card-image">
+                                <figure class="image is-4by3">
+                                  <img src="{{ item.thumbnail.url }}" alt="">
+                                </figure>
+                              </div>
+                              <div class="card-content">
+                                <div class="media">
+                                  <div class="media-content">
+                                    <p class="title is-5"><strong>{{ item.title }}</strong></p>
+                                    <p class="subtitle is-6">已浏览: {{ item.page_view }}</p>
+                                  </div>
+                                </div>
 
+                                <div class="content">
+                                  {{ item.desc }}
+                                  <br>
+                                  <small>{{ item.create_time }}</small>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <hr class="is-marginless" />
+    {% endif %}
+    <section id="about" class="section is-medium">
+        <div class="container">
+            <a href="{% url 'core:part' 'about' %}">
+                {% include 'core/_title.html' with title='关于我们' %}
+            </a>
+            {% include 'core/_subtitle.html' with subtitle='直接向您展示的我们' %}
+            <div id="about-main">
+                <img src="{% static "core/images/map.jpg" %}" alt="">
+                <div id="contract-board">
+                    <div class="title"><span>联系我们</span></div>
+                    <div class="info">
+                        <p><span><i class="fa fa-mobile" aria-hidden="true"></i>021-65983563</span><span><i
+                                class="fa fa-weixin" aria-hidden="true"></i>微信公众号: tongjiBWG</span></p>
+                        <p><span><i class="fa fa-location-arrow"
+                                    aria-hidden="true"></i>地址: 中国 上海 四平路 1239号一二九大楼</span>
+                        </p>
+                    </div>
+                    <form action="" method="post" target="_blank">
+                        <input style="display: none" id="id_title" name="title" type="text" placeholder="标题"/>
+                        <textarea name="content" placeholder="意见与建议"></textarea>
+                        <button type="submit">发送</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr class="is-marginless" />
     <div id="core">
         {% if sliders %}
 {#            <div id="slider">#}
@@ -142,112 +285,112 @@
 {#                </li>#}
 {#            </ul>#}
 {#        </div>#}
-        <div id="appointment">
-            <div id="appoint-banner">
-                <img src="{% static 'core/images/appointment.png' %}" alt="">
-            </div>
-            <div id="appoint-form">
-                <form action="{% url 'core:appoint' %}" method="post" target="_blank">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <div id="form-name">
-                            <input id="id_name" name="name" type="text" placeholder="团体名称"/>
-                        </div>
-                        <div id="form-contract">
-                            <input id="id_phone" name="phone" type="text" placeholder="联系方式"/>
-                        </div>
-                        <div id="form-time">
-                            <input id="id_time" name="time" type="text" placeholder="预约参观时间"/>
-                        </div>
-                        <div id="form-amount">
-                            <input id="id_amount" name="amount" type="text" placeholder="预约参观人数"/>
-                        </div>
-                    </div>
-                    <div id="form-note">
-                        <textarea id="id_note" name="note" placeholder="预约详情(具体时间等)"></textarea>
-                    </div>
-                    <div id="form-submit">
-                        <button type="submit">提交</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div id="exhibition">
-            <h2 class="part-title">
-                <span>网上巡展</span>
-            </h2>
-            <ul id="news_content">
-                {% for item in exhibitions %}
-                    <li>
-                        <a style="color: #333; text-decoration: blink" href="/museum/part/exhibition/{{ item.id }}">
-                            <div class="image">
-                                <img src={{ item.thumbnail.url }} alt=""/>
-                            </div>
-                            <div class="info">
-                                <h4>{{ item.title }}</h4>
-                            </div>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-            <div>
-                <button id="load-more"
-                        style="border: 2px solid #1967d2; background: transparent; padding: 10px 100px; border-radius: 10px; font-size: 1.2rem; margin-top: 30px; cursor: pointer;">
-                    更多
-                </button>
-            </div>
-        </div>
-        <div id="news">
-            <h2 class="part-title">
-                <span>最新资讯</span>
-            </h2>
-            <div id="news-slider">
-                <div id="bg"></div>
-                <ul>
-                    {% for item in news %}
-                        <li>
-                            <div class="img">
-                                <img src={{ item.thumbnail.url }} alt=""/>
-                            </div>
-                            <div class="info">
-                                <h1 class="title">
-                                    <a style="color: #283593; text-decoration: blink"
-                                       href="/museum/part/news/{{ item.id }}">{{ item.title }}</a>
-                                </h1>
-                                <hr/>
-                                <p>
-                                    {{ item.desc }}
-                                </p>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div id="about">
-            <h2 class="part-title">
-                <span>关于我们</span>
-            </h2>
-            <div id="about-main">
-                <img src="{% static "core/images/map.jpg" %}" alt="">
-                <div id="contract-board">
-                    <div class="title"><span>联系我们</span></div>
-                    <div class="info">
-                        <p><span><i class="fa fa-mobile" aria-hidden="true"></i>021-65983563</span><span><i
-                                class="fa fa-weixin" aria-hidden="true"></i>微信公众号: tongjiBWG</span></p>
-                        <p><span><i class="fa fa-location-arrow"
-                                    aria-hidden="true"></i>地址: 中国 上海 四平路 1239号一二九大楼</span>
-                        </p>
-                    </div>
-                    <form action="" method="post" target="_blank">
-                        <input style="display: none" id="id_title" name="title" type="text" placeholder="标题"/>
-                        <textarea name="content" placeholder="意见与建议"></textarea>
-                        <button type="submit">发送</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+{#        <div id="appointment">#}
+{#            <div id="appoint-banner">#}
+{#                <img src="{% static 'core/images/appointment.png' %}" alt="">#}
+{#            </div>#}
+{#            <div id="appoint-form">#}
+{#                <form action="{% url 'core:appoint' %}" method="post" target="_blank">#}
+{#                    {% csrf_token %}#}
+{#                    <div class="form-group">#}
+{#                        <div id="form-name">#}
+{#                            <input id="id_name" name="name" type="text" placeholder="团体名称"/>#}
+{#                        </div>#}
+{#                        <div id="form-contract">#}
+{#                            <input id="id_phone" name="phone" type="text" placeholder="联系方式"/>#}
+{#                        </div>#}
+{#                        <div id="form-time">#}
+{#                            <input id="id_time" name="time" type="text" placeholder="预约参观时间"/>#}
+{#                        </div>#}
+{#                        <div id="form-amount">#}
+{#                            <input id="id_amount" name="amount" type="text" placeholder="预约参观人数"/>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div id="form-note">#}
+{#                        <textarea id="id_note" name="note" placeholder="预约详情(具体时间等)"></textarea>#}
+{#                    </div>#}
+{#                    <div id="form-submit">#}
+{#                        <button type="submit">提交</button>#}
+{#                    </div>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div id="exhibition">#}
+{#            <h2 class="part-title">#}
+{#                <span>网上巡展</span>#}
+{#            </h2>#}
+{#            <ul id="news_content">#}
+{#                {% for item in exhibitions %}#}
+{#                    <li>#}
+{#                        <a style="color: #333; text-decoration: blink" href="/museum/part/exhibition/{{ item.id }}">#}
+{#                            <div class="image">#}
+{#                                <img src={{ item.thumbnail.url }} alt=""/>#}
+{#                            </div>#}
+{#                            <div class="info">#}
+{#                                <h4>{{ item.title }}</h4>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#            <div>#}
+{#                <button id="load-more"#}
+{#                        style="border: 2px solid #1967d2; background: transparent; padding: 10px 100px; border-radius: 10px; font-size: 1.2rem; margin-top: 30px; cursor: pointer;">#}
+{#                    更多#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div id="news">#}
+{#            <h2 class="part-title">#}
+{#                <span>最新资讯</span>#}
+{#            </h2>#}
+{#            <div id="news-slider">#}
+{#                <div id="bg"></div>#}
+{#                <ul>#}
+{#                    {% for item in news %}#}
+{#                        <li>#}
+{#                            <div class="img">#}
+{#                                <img src={{ item.thumbnail.url }} alt=""/>#}
+{#                            </div>#}
+{#                            <div class="info">#}
+{#                                <h1 class="title">#}
+{#                                    <a style="color: #283593; text-decoration: blink"#}
+{#                                       href="/museum/part/news/{{ item.id }}">{{ item.title }}</a>#}
+{#                                </h1>#}
+{#                                <hr/>#}
+{#                                <p>#}
+{#                                    {{ item.desc }}#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div id="about">#}
+{#            <h2 class="part-title">#}
+{#                <span>关于我们</span>#}
+{#            </h2>#}
+{#            <div id="about-main">#}
+{#                <img src="{% static "core/images/map.jpg" %}" alt="">#}
+{#                <div id="contract-board">#}
+{#                    <div class="title"><span>联系我们</span></div>#}
+{#                    <div class="info">#}
+{#                        <p><span><i class="fa fa-mobile" aria-hidden="true"></i>021-65983563</span><span><i#}
+{#                                class="fa fa-weixin" aria-hidden="true"></i>微信公众号: tongjiBWG</span></p>#}
+{#                        <p><span><i class="fa fa-location-arrow"#}
+{#                                    aria-hidden="true"></i>地址: 中国 上海 四平路 1239号一二九大楼</span>#}
+{#                        </p>#}
+{#                    </div>#}
+{#                    <form action="" method="post" target="_blank">#}
+{#                        <input style="display: none" id="id_title" name="title" type="text" placeholder="标题"/>#}
+{#                        <textarea name="content" placeholder="意见与建议"></textarea>#}
+{#                        <button type="submit">发送</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}
 
 {% block scripts %}

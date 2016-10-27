@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'museum/', include('core.urls'), name='core'),
+    url(r'museum/', include('core.urls')),
     url(r'museum/admin/', admin.site.urls, name='admin'),
     url(r'museum/comment', include('comment.urls'), name='comment'),
     url(r'museum/doc', include('doc.urls'), name='doc'),

@@ -11,7 +11,7 @@ MAX_ITEMS = 10
 
 
 def index(request):
-    news = Article.objects.filter(part__name='news').order_by('create_time')[:5] or []
+    news = Article.objects.filter(part__name='news').order_by('create_time')[:3] or []
     sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:5] or []
     exhibitions = Article.objects.filter(part__name='exhibition').order_by('create_time')[:4] or []
 
@@ -45,11 +45,11 @@ def apply_appoint(request):
 
 def article(request, article_id):
     try:
-        article = Article.objects.get(id=article_id)
+        articles = Article.objects.get(id=article_id)
     except ObjectDoesNotExist:
-        article = None
+        articles = None
     return render(request, 'core/article.html', {
-        'article': article
+        'article': articles
     })
 
 

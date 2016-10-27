@@ -16,7 +16,7 @@ class Article(models.Model):
     desc = models.CharField(max_length=150, blank=True)
     content = models.TextField()
     create_time = models.DateTimeField(default=datetime.today())
-    thumbnail = models.ImageField(blank=True)
+    thumbnail = models.ImageField()
     secret = models.BooleanField(default=False)
     page_view = models.IntegerField(default=0)
 

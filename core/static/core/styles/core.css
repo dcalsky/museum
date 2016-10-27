@@ -198,15 +198,12 @@
 }
 #about {
   position: relative;
-  margin: 2rem 0;
-  min-width: 950px;
 }
+
 #about img {
   width: 100%;
 }
-#about-main {
-  margin: 0 8rem;
-}
+
 #about #contract-board {
   position: absolute;
   top: 220px;
