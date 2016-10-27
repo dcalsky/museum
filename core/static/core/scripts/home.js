@@ -25,15 +25,20 @@ var jumpToArticle = function (num) {
 
 $(document).ready(function () {
     var page = 0
-    var slider = new Slider($('#slider'))
-    var newsSlider = new Slider($('#news-slider'))
+    // var slider = new Slider($('#slider'))
+    // var newsSlider = new Slider($('#news-slider'))
     $('a').smoothScroll({
         easing: 'swing',
         speed: 400,
         offset: -190
     });
-    slider.init()
-    newsSlider.init()
+    $('.bxslider').bxSlider({
+        adaptiveHeight: true,
+        mode: 'fade',
+        captions: true
+    });
+    // slider.init()
+    // newsSlider.init()
     $('#load-more').click(function () {
         $.ajax({
             url: '/museum/' + page,

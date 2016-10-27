@@ -66,43 +66,12 @@
     </div>
 </section>
 
-{#<header>#}
-{#    <div id="header">#}
-{#        <ul id="navbar">#}
-{#            <div id="logo-left">#}
-{#                <li><a href="{% url 'core:index' %}"><span>首页</span><br/><span>HOME</span></a></li>#}
-{#                <li><a href="{% url 'core:index' %}#exhibition"><span>网上巡展</span><br/><span>EXHIBITION</span></a></li>#}
-{#                <li><a href="{% url 'core:index' %}#floor"><span>参观引导</span><br/><span>GUIDE</span></a></li>#}
-{#            </div>#}
-{#            <div id="logo-right">#}
-{#                <li><a href="{% url 'core:index' %}#news"><span>最新资讯</span><br/><span>NEWS</span></a></li>#}
-{#                <li><a href="/museum/part/about/18"><span>关于我们</span><br/><span>ABOUT</span></a></li>#}
-{#                <li><a href="{% url 'comment:index' %}"><span>留言板</span><br/><span>COMMENT</span></a></li>#}
-{#            </div>#}
-{#        </ul>#}
-{#        <div id="navbar-logo">#}
-{#            <a href="/museum">#}
-{#                <img src="{% static 'common/images/tongji_logo.png' %}" alt="">#}
-{#                <p>同济大学博物馆 <br/> THE MUSEUM OF TONGJI UNIVERSITY</p>#}
-{#            </a>#}
-{#        </div>#}
-{#    </div>#}
-{#</header>#}
 {% block main %}{% endblock %}
+
 <div id="backTop">
     <a href="#header"><img src="{% static 'common/images/backTop.png' %}" alt="Top" /></a>
 </div>
 
-{#<footer id="footer">#}
-{#    <hr/>#}
-{#    <div>#}
-{#        <span class="title">链接 Links</span>#}
-{#        <span>#}
-{#            <a href="http://www.tongji.edu.cn">同济大学</a>#}
-{#            <a href="http://www.lib.tongji.edu.cn/site/tongji/index.html">同济大学图书馆</a>#}
-{#        </span>#}
-{#    </div>#}
-{#</footer>#}
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">

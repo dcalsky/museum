@@ -2,29 +2,25 @@
 {% load staticfiles %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'common/bower_components/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'core/styles/unslider.css' %}">
-    <link rel="stylesheet" href="{% static 'core/styles/unslider-dots.css' %}">
     <link rel="stylesheet" href="{% static 'core/styles/core.css' %}">
-    <link rel="stylesheet" href="{% static 'core/styles/slider.css' %}">
+    <link rel="stylesheet" href="{% static 'core/styles/jquery.bxslider.css' %}">
 {% endblock %}
 
 {% block main %}
     {% if sliders %}
-
         <section class="section is-medium">
             <div class="container">
                 <div class="columns is-vcentered">
-                    <div class="column is-one-third">
+                    <div class="column is-6">
                         {% include 'core/_title.html' with title='近期消息' %}
                         {% include 'core/_subtitle.html' with subtitle='从这里开始了解来自馆内的新消息' %}
                     </div>
                     <div class="column">
-                        <ul id="slider">
+                        <ul class="bxslider">
                             {% for item in sliders %}
                                 <li>
-                                    {% load static %}
-                                    <a href="/museum/part/slider/{{ item.id }}">
-                                        <img src={{ item.thumbnail.url }} alt="slider"/>
+                                    <a href="#">
+                                        <img src="{{ item.thumbnail.url }}" title="{{ item.title }}" alt="slide" />
                                     </a>
                                 </li>
                             {% endfor %}
@@ -41,9 +37,9 @@
                 <div class="columns is-vcentered">
                     <div class="column is-one-third">
                         <a href="{% url 'core:part' 'news' %}">
-                            {% include 'core/_title.html' with title='近期消息' %}
+                            {% include 'core/_title.html' with title='最新资讯' %}
                         </a>
-                        {% include 'core/_subtitle.html' with subtitle='从这里开始了解来自馆内的新消息' %}
+                        {% include 'core/_subtitle.html' with subtitle='文化动态可持续的共同关注' %}
                     </div>
                     <div class="column">
                         <div class="columns">
@@ -227,175 +223,11 @@
         </div>
     </section>
     <hr class="is-marginless" />
-    <div id="core">
-        {% if sliders %}
-{#            <div id="slider">#}
-{#                <ul>#}
-{#                    {% for item in sliders %}#}
-{#                        <li>#}
-{#                            {% load static %}#}
-{#                            <a href="/museum/part/slider/{{ item.id }}">#}
-{#                                <img src={{ item.thumbnail.url }} alt="slider"/>#}
-{#                            </a>#}
-{#                        </li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            </div>#}
-        {% endif %}
-{#        <div id="floor">#}
-{#            <h2 class="part-title">#}
-{#                <span>楼层索引</span>#}
-{#            </h2>#}
-{#            <ul>#}
-{#                <li onclick="jumpToArticle(1)">#}
-{#                    <div class="image">#}
-{#                        <div class="default-image">#}
-{#                            <span>1F</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="info">#}
-{#                        <h3 class="title">博物馆一层</h3>#}
-{#                        <p class="en-title">FIRST FLOOR</p>#}
-{#                        <p class="name">艺术与创意空间</p>#}
-{#                    </div>#}
-{#                </li>#}
-{#                <li onclick="jumpToArticle(2)">#}
-{#                    <div class="image">#}
-{#                        <div class="default-image">#}
-{#                            <span>2F</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="info">#}
-{#                        <h3 class="title">博物馆二层</h3>#}
-{#                        <p class="en-title">SECOND FLOOR</p>#}
-{#                        <p class="name">临时展厅A</p>#}
-{#                    </div>#}
-{#                </li>#}
-{#                <li onclick="jumpToArticle(3)">#}
-{#                    <div class="image">#}
-{#                        <div class="default-image">#}
-{#                            <span>3F</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="info">#}
-{#                        <h3 class="title">博物馆三层</h3>#}
-{#                        <p class="en-title">THIRD FLOOR</p>#}
-{#                        <p class="name">临时展厅B</p>#}
-{#                    </div>#}
-{#                </li>#}
-{#            </ul>#}
-{#        </div>#}
-{#        <div id="appointment">#}
-{#            <div id="appoint-banner">#}
-{#                <img src="{% static 'core/images/appointment.png' %}" alt="">#}
-{#            </div>#}
-{#            <div id="appoint-form">#}
-{#                <form action="{% url 'core:appoint' %}" method="post" target="_blank">#}
-{#                    {% csrf_token %}#}
-{#                    <div class="form-group">#}
-{#                        <div id="form-name">#}
-{#                            <input id="id_name" name="name" type="text" placeholder="团体名称"/>#}
-{#                        </div>#}
-{#                        <div id="form-contract">#}
-{#                            <input id="id_phone" name="phone" type="text" placeholder="联系方式"/>#}
-{#                        </div>#}
-{#                        <div id="form-time">#}
-{#                            <input id="id_time" name="time" type="text" placeholder="预约参观时间"/>#}
-{#                        </div>#}
-{#                        <div id="form-amount">#}
-{#                            <input id="id_amount" name="amount" type="text" placeholder="预约参观人数"/>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div id="form-note">#}
-{#                        <textarea id="id_note" name="note" placeholder="预约详情(具体时间等)"></textarea>#}
-{#                    </div>#}
-{#                    <div id="form-submit">#}
-{#                        <button type="submit">提交</button>#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div id="exhibition">#}
-{#            <h2 class="part-title">#}
-{#                <span>网上巡展</span>#}
-{#            </h2>#}
-{#            <ul id="news_content">#}
-{#                {% for item in exhibitions %}#}
-{#                    <li>#}
-{#                        <a style="color: #333; text-decoration: blink" href="/museum/part/exhibition/{{ item.id }}">#}
-{#                            <div class="image">#}
-{#                                <img src={{ item.thumbnail.url }} alt=""/>#}
-{#                            </div>#}
-{#                            <div class="info">#}
-{#                                <h4>{{ item.title }}</h4>#}
-{#                            </div>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#            <div>#}
-{#                <button id="load-more"#}
-{#                        style="border: 2px solid #1967d2; background: transparent; padding: 10px 100px; border-radius: 10px; font-size: 1.2rem; margin-top: 30px; cursor: pointer;">#}
-{#                    更多#}
-{#                </button>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div id="news">#}
-{#            <h2 class="part-title">#}
-{#                <span>最新资讯</span>#}
-{#            </h2>#}
-{#            <div id="news-slider">#}
-{#                <div id="bg"></div>#}
-{#                <ul>#}
-{#                    {% for item in news %}#}
-{#                        <li>#}
-{#                            <div class="img">#}
-{#                                <img src={{ item.thumbnail.url }} alt=""/>#}
-{#                            </div>#}
-{#                            <div class="info">#}
-{#                                <h1 class="title">#}
-{#                                    <a style="color: #283593; text-decoration: blink"#}
-{#                                       href="/museum/part/news/{{ item.id }}">{{ item.title }}</a>#}
-{#                                </h1>#}
-{#                                <hr/>#}
-{#                                <p>#}
-{#                                    {{ item.desc }}#}
-{#                                </p>#}
-{#                            </div>#}
-{#                        </li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div id="about">#}
-{#            <h2 class="part-title">#}
-{#                <span>关于我们</span>#}
-{#            </h2>#}
-{#            <div id="about-main">#}
-{#                <img src="{% static "core/images/map.jpg" %}" alt="">#}
-{#                <div id="contract-board">#}
-{#                    <div class="title"><span>联系我们</span></div>#}
-{#                    <div class="info">#}
-{#                        <p><span><i class="fa fa-mobile" aria-hidden="true"></i>021-65983563</span><span><i#}
-{#                                class="fa fa-weixin" aria-hidden="true"></i>微信公众号: tongjiBWG</span></p>#}
-{#                        <p><span><i class="fa fa-location-arrow"#}
-{#                                    aria-hidden="true"></i>地址: 中国 上海 四平路 1239号一二九大楼</span>#}
-{#                        </p>#}
-{#                    </div>#}
-{#                    <form action="" method="post" target="_blank">#}
-{#                        <input style="display: none" id="id_title" name="title" type="text" placeholder="标题"/>#}
-{#                        <textarea name="content" placeholder="意见与建议"></textarea>#}
-{#                        <button type="submit">发送</button>#}
-{#                    </form>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'common/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'common/bower_components/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'core/scripts/jquery.smooth.scroll.min.js' %}"></script>
-    <script src="{% static 'core/scripts/unslider-min.js' %}"></script>
+    <script src="{% static 'core/scripts/jquery.bxslider.min.js' %}"></script>
     <script src="{% static 'core/scripts/home.js' %}"></script>
 {% endblock %}
