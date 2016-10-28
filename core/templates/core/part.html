@@ -30,7 +30,7 @@
                 {{ part_title }}
             </h3>
             {% include 'core/_subtitle.html' with subtitle='文章列表' %}
-            <div class="columns">
+            <div class="columns is-multiline">
                 {% for item in articles %}
                     <div class="column is-4">
                         {% if is_doc %}
@@ -66,7 +66,6 @@
                                 </article>
                             </a>
                         {% endif %}
-
                     </div>
                 {% endfor %}
             </div>
