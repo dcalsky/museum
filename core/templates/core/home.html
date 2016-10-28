@@ -18,7 +18,7 @@
                         <ul class="bxslider">
                             {% for item in sliders %}
                                 <li>
-                                    <a href="#">
+                                    <a href="part/slider/{{ item.id }}">
                                         <img src="{{ item.thumbnail.url }}" title="{{ item.title }}" alt="slide"/>
                                     </a>
                                 </li>
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <footer class="card-footer">
-                                        <a href="news/{{ item.id }}" class="card-footer-item">进入页面</a>
+                                        <a href="part/news/{{ item.id }}" class="card-footer-item">进入页面</a>
                                     </footer>
                                 </div>
                             {% endfor %}
@@ -169,7 +169,7 @@
                     {% for item in exhibitions %}
                         <div class="column is-3">
                             <div class="card is-fullwidth">
-                                <a href="exhibition/{{ item.id }}">
+                                <a href="part/exhibition/{{ item.id }}">
                                     <div class="card-image">
                                         <figure class="image is-1by1">
                                             <img src="{{ item.thumbnail.url }}" alt="">
