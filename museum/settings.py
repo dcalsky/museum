@@ -137,6 +137,6 @@ SUMMERNOTE_CONFIG = {
     ),
     'external_css': (
         '//cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css',
-    ),
+    )
 }
 
