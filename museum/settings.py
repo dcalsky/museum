@@ -120,7 +120,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
@@ -129,4 +128,15 @@ MEDIA_ROOT = os.path.join(STATIC_ROOT, "media")
 STATIC_URL = '/museum/static/'
 MEDIA_URL = '/museum/media/'
 URL_PREFIX = "/museum"
+
+# Summernote
+SUMMERNOTE_CONFIG = {
+    'external_js': (
+        '//lib.tongji.edu.cn/museum/static/common/bower_components/jquery/jquery.min.js',
+        '//cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js',
+    ),
+    'external_css': (
+        '//cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css',
+    ),
+}
 

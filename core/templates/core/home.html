@@ -80,11 +80,10 @@
                     {% for item in guides %}
                         <div class="tile is-parent">
                             <article class="tile is-child notification is-primary">
-                                <a href="guide/{{ item.id }}" class="content">
+                                <a href="part/guide/{{ item.id }}" class="content">
                                     <p class="title">{{ item.title }}</p>
-                                    <p class="subtitle">{{ item.desc }}</p>
                                     <div class="content">
-                                        {{ item.content | safe }}
+                                        {{ item.desc }}
                                     </div>
                                 </a>
                             </article>
@@ -111,10 +110,13 @@
                             </div>
                             <div class="control is-grouped">
                                 <p class="control is-expanded">
-                                    <input class="input" type="text" placeholder="团体名称">
+                                    <input name="name" class="input" type="text" placeholder="团体名称">
                                 </p>
                                 <p class="control is-expanded">
-                                    <input class="input" type="text" placeholder="参观人数">
+                                    <input name="amount" class="input" type="text" placeholder="参观人数">
+                                </p>
+                                <p class="control is-expanded">
+                                    <input name="phone" class="input" type="text" placeholder="联系方式">
                                 </p>
                             </div>
                         </div>
@@ -124,7 +126,7 @@
                                 <label class="label">参观时间</label>
                             </div>
                             <div class="control is-fullwidth">
-                                <input class="input" type="text" placeholder="您的参观时间对此次接待十分重要">
+                                <input name="time" class="input" type="text" placeholder="您的参观时间对此次接待十分重要">
                             </div>
                         </div>
 
@@ -134,7 +136,7 @@
                             </div>
                             <div class="control">
                                 <textarea class="textarea" id="id_note" name="note"
-                                          placeholder="请告诉我们更多您此次的安排详情(具体时间等)"></textarea>
+                                          placeholder="请告诉我们更多您此次的安排详情 (可选)"></textarea>
                             </div>
                         </div>
 
@@ -143,9 +145,7 @@
                                 <label class="label"></label>
                             </div>
                             <div class="control">
-                                <input type="submit" class="button is-success" value="提交预约">
-
-                                </input>
+                                <input type="submit" class="button is-success" value="提交预约" />
                             </div>
 
                         </div>

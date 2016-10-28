@@ -24,15 +24,18 @@ def index(request):
 
 @require_POST
 def apply_appoint(request):
-    appoint = Appoint(
-        name=request.POST.get('name'),
-        phone=request.POST.get('phone'),
-        note=request.POST.get('note'),
-        time=request.POST.get('time'),
-        amount=request.POST.get('amount')
-    )
-    appoint.save()
-    return HttpResponse("预约成功!")
+    if request.POST.get('name') and request.POST.get('phone') and request.POST.get('time') and request.POST.get('amount'):
+        appoint = Appoint(
+            name=request.POST.get('name'),
+            phone=request.POST.get('phone'),
+            note=request.POST.get('note'),
+            time=request.POST.get('time'),
+            amount=request.POST.get('amount')
+        )
+        appoint.save()
+        return HttpResponse("预约成功!")
+    else:
+        return HttpResponse("必填栏目不得为空!")
 
 
 def article(request, part_name, article_id):
