@@ -11,80 +11,87 @@
     <title>同济大学博物馆 | Museum of The Tongji University</title>
     <link rel="stylesheet" href="{% static 'common/styles/bulma.min.css' %}">
     <link rel="stylesheet" href="{% static 'common/styles/common.css' %}">
+    <link rel="stylesheet" href="{% static 'common/bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="icon" href="{% static 'common/images/favicon.ico' %}">
     {% block head %}{% endblock %}
 </head>
 <body>
 <section class="hero is-large is-bold is-info">
     <div class="hero-head">
         <div class="container">
-    <nav class="nav">
-  <div class="nav-left">
-    <a class="nav-item is-brand" href="{% url 'core:index' %}">
-      <img src="{% static 'common/images/tongji_logo.png' %}" alt="museum logo">
-    </a>
-  </div>
+            <nav class="nav">
+                <div class="nav-left">
+                    <a class="nav-item is-brand" href="{% url 'core:index' %}">
+                        <img src="{% static 'common/images/tongji_logo.png' %}" alt="museum logo">
+                    </a>
+                </div>
 
-  <div class="nav-center">
-    <a class="nav-item" href="#">
-        网上巡展
-    </a>
-    <a class="nav-item" href="#">
-        参观引导
-    </a>
-    <a class="nav-item" href="#">
-        最新咨询
-    </a>
-    <a class="nav-item" href="#">
-        关于我们
-    </a>
-  </div>
+                <div class="nav-center">
+                    <a class="nav-item" href="{% url 'core:part' 'exhibition' %}">
+                        网上巡展
+                    </a>
+                    <a class="nav-item" href="{% url 'core:part' 'guide' %}">
+                        参观引导
+                    </a>
+                    <a class="nav-item" href="{% url 'core:part' 'news' %}">
+                        最新咨询
+                    </a>
+                    <a class="nav-item" href="{% url 'core:part' 'doc' %}">
+                        文档中心
+                    </a>
+                </div>
 
-  <div class="nav-right nav-menu">
-    <span class="nav-item">
-      <a class="button is-outlined is-light" href="#">
-        <span class="icon">
-          <i class="fa fa-pencil-square-o"></i>
-        </span>
-        <span>留言板</span>
-      </a>
-    </span>
-  </div>
-</nav>
-</div>
-</div>
+{#                <div class="nav-right nav-menu">#}
+{#    <span class="nav-item">#}
+{#      <a class="button is-outlined is-light" href="#">#}
+{#        <span class="icon">#}
+{#          <i class="fa fa-pencil-square-o"></i>#}
+{#        </span>#}
+{#        <span>留言板</span>#}
+{#      </a>#}
+{#    </span>#}
+{#                </div>#}
+            </nav>
+        </div>
+    </div>
     <div class="hero-body">
+        <img id="tongji-badege" src="{% static 'common/images/tongji_badge.png' %}" alt="">
         <div class="container">
             <div class="container has-text-centered">
-              <h1 class="title">
-                同济大学博物馆
-              </h1>
-              <h2 class="subtitle">
-                THE MUSEUM OF <strong>TONGJI</strong> UNIVERSITY
-              </h2>
+                <h1 class="title">
+                    同济大学博物馆
+                </h1>
+                <h2 class="subtitle">
+                    THE MUSEUM OF <strong>TONGJI</strong> UNIVERSITY
+                </h2>
             </div>
         </div>
+    </div>
+    <div class="hero-footer">
+        {% block hero-footer %}{% endblock %}
     </div>
 </section>
 
 {% block main %}{% endblock %}
 
 <div id="backTop">
-    <a href="#header"><img src="{% static 'common/images/backTop.png' %}" alt="Top" /></a>
+    <a href="#header"><img src="{% static 'common/images/backTop.png' %}" alt="Top"/></a>
 </div>
 
 <footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>
-        <strong>Museum website</strong> designed by <a href="http://www.noddl.me">Dcalsky</a>. For the museum of <a href="http://www.tongji.edu.cn">Tongji University</a>.
-      </p>
-      <p>
-        <a class="icon" href="{% url 'core:index' %}">
-          <img src="{% static 'common/images/tongji_logo.png' %}" alt="museum logo">
-        </a>
-      </p>
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Museum website</strong> designed by <a href="http://www.noddl.me">Dcalsky</a>. For the museum of
+                <a href="http://www.tongji.edu.cn">Tongji University</a>.
+            </p>
+            <p>
+                <a class="icon" href="{% url 'core:index' %}">
+                    <img src="{% static 'common/images/tongji_logo.png' %}" alt="museum logo">
+                </a>
+            </p>
+        </div>
     </div>
-  </div>
 </footer>
 {% block scripts %}{% endblock %}
 </body>

@@ -2,6 +2,12 @@
   max-width: 40%;
 }
 
+@media all and (max-device-width: 960px) {
+  #about {
+    display: none;
+  }
+}
+
 #about {
   position: relative;
 }

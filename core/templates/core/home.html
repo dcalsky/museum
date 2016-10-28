@@ -1,7 +1,6 @@
 {% extends 'common/layout.html' %}
 {% load staticfiles %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'common/bower_components/font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'core/styles/core.css' %}">
     <link rel="stylesheet" href="{% static 'core/styles/jquery.bxslider.css' %}">
 {% endblock %}
@@ -20,7 +19,7 @@
                             {% for item in sliders %}
                                 <li>
                                     <a href="#">
-                                        <img src="{{ item.thumbnail.url }}" title="{{ item.title }}" alt="slide" />
+                                        <img src="{{ item.thumbnail.url }}" title="{{ item.title }}" alt="slide"/>
                                     </a>
                                 </li>
                             {% endfor %}
@@ -29,7 +28,7 @@
                 </div>
             </div>
         </section>
-        <hr class="is-marginless" />
+        <hr class="is-marginless"/>
     {% endif %}
     {% if news %}
         <section class="section is-medium">
@@ -44,22 +43,22 @@
                     <div class="column">
                         <div class="columns">
                             {% for item in news %}
-                                <div class="card column is-4">
-                                  <header class="card-header">
-                                    <p class="card-header-title">
-                                      {{ item.title }}
-                                    </p>
-                                  </header>
-                                  <div class="card-content">
-                                    <div class="content">
-                                        {{ item.desc }}
-                                      <br>
-                                      <small>{{ item.create_time }}</small>
+                                <div class="card is-fullwidth column">
+                                    <header class="card-header">
+                                        <p class="card-header-title">
+                                            {{ item.title }}
+                                        </p>
+                                    </header>
+                                    <div class="card-content">
+                                        <div class="content">
+                                            {{ item.desc }}
+                                            <br>
+                                            <small>{{ item.create_time | date:"Y年m月d日H时" }}</small>
+                                        </div>
                                     </div>
-                                  </div>
-                                  <footer class="card-footer">
-                                    <a class="card-footer-item">进入页面</a>
-                                  </footer>
+                                    <footer class="card-footer">
+                                        <a href="news/{{ item.id }}" class="card-footer-item">进入页面</a>
+                                    </footer>
                                 </div>
                             {% endfor %}
                         </div>
@@ -67,52 +66,57 @@
                 </div>
             </div>
         </section>
-        <hr class="is-marginless" />
+        <hr class="is-marginless"/>
     {% endif %}
-    <section class="section is-medium">
-        <div class="container">
-            <a href="{% url 'core:part' 'guide' %}">
-                {% include 'core/_title.html' with title='楼层引导' %}
-            </a>
-            {% include 'core/_subtitle.html' with subtitle='各式文化由不同的楼层中感受到' %}
-            <div class="tile is-ancestor">
-              <div class="tile is-parent">
-                <article class="tile is-child notification is-primary">
-                  <div class="content">
-                    <p class="title">博物馆一层</p>
-                    <p class="subtitle">FIRST FLOOR</p>
-                    <div class="content">
-                        艺术与创意空间
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child notification is-warning">
-                  <div class="content">
-                    <p class="title">博物馆二层</p>
-                    <p class="subtitle">SECOND FLOOR</p>
-                    <div class="content">
-                        艺术与创意空间
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child notification is-danger">
-                  <div class="content">
-                    <p class="title">博物馆三层</p>
-                    <p class="subtitle">THIRD FLOOR</p>
-                    <div class="content">
-                        艺术与创意空间
-                    </div>
-                  </div>
-                </article>
-              </div>
+    {% if guides %}
+
+        <section class="section is-medium">
+            <div class="container">
+                <a href="{% url 'core:part' 'guide' %}">
+                    {% include 'core/_title.html' with title='楼层引导' %}
+                </a>
+                {% include 'core/_subtitle.html' with subtitle='各式文化由不同的楼层中感受到' %}
+                <div class="tile is-ancestor">
+                    {% for item in guides %}
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification is-primary">
+                                <a href="guide/{{ item.id }}" class="content">
+                                    <p class="title">{{ item.title }}</p>
+                                    <p class="subtitle">{{ item.desc }}</p>
+                                    <div class="content">
+                                        {{ item.content | safe }}
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    {% endfor %}
+                    {#              <div class="tile is-parent">#}
+                    {#                <article class="tile is-child notification is-warning">#}
+                    {#                  <div class="content">#}
+                    {#                    <p class="title">博物馆二层</p>#}
+                    {#                    <p class="subtitle">SECOND FLOOR</p>#}
+                    {#                    <div class="content">#}
+                    {#                        艺术与创意空间#}
+                    {#                    </div>#}
+                    {#                  </div>#}
+                    {#                </article>#}
+                    {#              </div>#}
+                    {#              <div class="tile is-parent">#}
+                    {#                <article class="tile is-child notification is-danger">#}
+                    {#                  <div class="content">#}
+                    {#                    <p class="title">博物馆三层</p>#}
+                    {#                    <p class="subtitle">THIRD FLOOR</p>#}
+                    {#                    <div class="content">#}
+                    {#                        艺术与创意空间#}
+                    {#                    </div>#}
+                    {#                  </div>#}
+                    {#                </article>#}
+                    {#              </div>#}
+                </div>
             </div>
-        </div>
-    </section>
-    <hr class="is-marginless" />
+        </section>
+    {% endif %}
+    <hr class="is-marginless"/>
     <section class="section is-medium">
         <div class="container">
             <div class="columns">
@@ -121,43 +125,61 @@
                     {% include 'core/_subtitle.html' with subtitle='深入探索博物馆最好的实践' %}
                 </div>
                 <div class="column">
-                    <form action="{% url 'core:appoint' %}" method="post" target="_blank" class="control " >
+                    <form action="{% url 'core:appoint' %}" method="post" target="_blank" class="control ">
                         {% csrf_token %}
                         <div class="control is-horizontal">
-                          <div class="control-label">
-                            <label class="label">基本信息</label>
-                          </div>
-                          <div class="control is-grouped">
-                            <p class="control is-expanded">
-                              <input class="input" type="text" placeholder="团体名称">
-                            </p>
-                            <p class="control is-expanded">
-                              <input class="input" type="text" placeholder="参观人数">
-                            </p>
-                          </div>
+                            <div class="control-label">
+                                <label class="label">基本信息</label>
+                            </div>
+                            <div class="control is-grouped">
+                                <p class="control is-expanded">
+                                    <input class="input" type="text" placeholder="团体名称">
+                                </p>
+                                <p class="control is-expanded">
+                                    <input class="input" type="text" placeholder="参观人数">
+                                </p>
+                            </div>
                         </div>
+
                         <div class="control is-horizontal">
-                          <div class="control-label">
-                            <label class="label">参观时间</label>
-                          </div>
-                          <div class="control is-fullwidth">
-                              <input class="input" type="text" placeholder="您的参观时间对此次接待十分重要">
-                          </div>
+                            <div class="control-label">
+                                <label class="label">参观时间</label>
+                            </div>
+                            <div class="control is-fullwidth">
+                                <input class="input" type="text" placeholder="您的参观时间对此次接待十分重要">
+                            </div>
                         </div>
+
                         <div class="control is-horizontal">
-                          <div class="control-label">
-                            <label class="label">详细信息</label>
-                          </div>
-                          <div class="control">
-                            <textarea class="textarea" id="id_note" name="note" placeholder="请告诉我们更多您此次的安排详情(具体时间等)"></textarea>
-                          </div>
+                            <div class="control-label">
+                                <label class="label">详细信息</label>
+                            </div>
+                            <div class="control">
+                                <textarea class="textarea" id="id_note" name="note"
+                                          placeholder="请告诉我们更多您此次的安排详情(具体时间等)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="control is-horizontal">
+                            <div class="control-label">
+                                <label class="label"></label>
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button has-text-centered is-success">
+                                  <span class="icon">
+                                    <i class="fa fa-check"></i>
+                                  </span>
+                                    <span>提交预约</span>
+                                </button>
+                            </div>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    <hr class="is-marginless" />
+    <hr class="is-marginless"/>
     {% if exhibitions %}
         <section class="section is-medium">
             <div class="container">
@@ -168,33 +190,36 @@
                 <div class="columns">
                     {% for item in exhibitions %}
                         <div class="column is-3">
-                            <div class="card">
-                              <div class="card-image">
-                                <figure class="image is-4by3">
-                                  <img src="{{ item.thumbnail.url }}" alt="">
-                                </figure>
-                              </div>
-                              <div class="card-content">
-                                <div class="media">
-                                  <div class="media-content">
-                                    <p class="title is-5"><strong>{{ item.title }}</strong></p>
-                                    <p class="subtitle is-6">已浏览: {{ item.page_view }}</p>
-                                  </div>
-                                </div>
+                            <div class="card is-fullwidth">
+                                <a href="exhibition/{{ item.id }}">
+                                    <div class="card-image">
+                                        <figure class="image is-1by1">
+                                            <img src="{{ item.thumbnail.url }}" alt="">
+                                        </figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="media">
+                                            <div class="media-content">
+                                                <p class="title is-5"><strong>{{ item.title }}</strong></p>
+{#                                                <p class="subtitle is-6">已浏览: {{ item.page_view }}</p>#}
+                                            </div>
+                                        </div>
 
-                                <div class="content">
-                                  {{ item.desc }}
-                                  <br>
-                                  <small>{{ item.create_time }}</small>
-                                </div>
-                              </div>
+                                        <div class="content">
+                                            {{ item.desc }}
+                                            <br>
+                                            <small>{{ item.create_time | date:"Y年m月d日H时" }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+
                             </div>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </section>
-        <hr class="is-marginless" />
+        <hr class="is-marginless"/>
     {% endif %}
     <section id="about" class="section is-medium">
         <div class="container">
@@ -222,7 +247,7 @@
             </div>
         </div>
     </section>
-    <hr class="is-marginless" />
+    <hr class="is-marginless"/>
 {% endblock %}
 
 {% block scripts %}

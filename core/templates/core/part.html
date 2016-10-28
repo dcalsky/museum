@@ -4,6 +4,81 @@
     <link rel="stylesheet" href="{% static 'core/styles/part.css' %}">
 {% endblock %}
 
-{% block main %}
+{% block hero-footer %}
+{% endblock %}
 
+{% block main %}
+    <section class="section is-small">
+        <div class="container">
+            <nav class="level is-mobile">
+                <div class="level-item has-text-centered">
+                    <p class="heading">文章总数</p>
+                    <p class="title">{{ articles.paginator.count }}</p>
+                </div>
+                <div class="level-item has-text-centered">
+                    <p class="heading">浏览人数</p>
+                    <p class="title">{{ views }}</p>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <hr class="is-marginless"/>
+    <section class="section">
+        <div class="container">
+            <h3 class="title is-2">
+                <span class="icon is-large"><i class="fa fa-pause"></i></span>
+                {{ part_title }}
+            </h3>
+            {% include 'core/_subtitle.html' with subtitle='文章列表' %}
+            <div class="columns">
+                {% for item in articles %}
+                    <div class="column is-4">
+                        {% if is_doc %}
+                            <a href="{{ item.file.url }}">
+                                <article class="message">
+                                    <div class="message-header">
+                                        {{ item.title }}
+                                    </div>
+                                    <div class="message-body">
+                                        <small>{{ item.create_time }}</small>
+                                        {% if item.desc %}
+                                            {{ item.desc }}
+                                        {% else %}
+                                            暂无详细介绍。
+                                        {% endif %}
+                                    </div>
+                                </article>
+                            </a>
+                        {% else %}
+                            <a href="{{ part_name }}/{{ item.id }}">
+                                <article class="message">
+                                    <div class="message-header">
+                                        {{ item.title }}
+                                    </div>
+                                    <div class="message-body">
+                                        {% if item.desc %}
+                                            {{ item.desc }}
+                                        {% else %}
+                                            暂无详细介绍。
+                                        {% endif %}
+                                        <p><small>{{ item.create_time | date:"Y年m月d日H时" }}</small></p>
+                                    </div>
+                                </article>
+                            </a>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+            </div>
+            <nav class="pagination">
+                {% if articles.has_previous %}
+                    <a href="?page={{ articles.previous_page_number }}" class="button">上一页</a>
+                {% endif %}
+                {% if articles.has_next %}
+                    <a href="?page={{ articles.next_page_number }}" class="button">下一页</a>
+                {% endif %}
+                <span>第 {{ articles.number }} 页 | 共 {{ max_page }} 页</span>
+            </nav>
+        </div>
+    </section>
 {% endblock %}

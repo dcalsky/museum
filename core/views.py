@@ -1,11 +1,10 @@
 # coding=utf-8
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.http import require_POST
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.core.serializers import serialize
-from .models import Article, Part, Appoint
+from .models import Article, Part, Appoint, Document
 
 MAX_ITEMS = 10
 
@@ -14,20 +13,13 @@ def index(request):
     news = Article.objects.filter(part__name='news').order_by('create_time')[:3] or []
     sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:5] or []
     exhibitions = Article.objects.filter(part__name='exhibition').order_by('create_time')[:4] or []
-
+    guides = Article.objects.filter(part__name='guide').order_by('create_time')[:3] or []
     return render(request, 'core/home.html', {
         'news': news,
         'exhibitions': exhibitions,
-        'sliders': sliders
+        'sliders': sliders,
+        'guides': guides
     })
-
-
-def load_more(request, page=1):
-    page = int(page)
-    exhibitions_part = Part.objects.get(name='exhibition')
-    exhibitions_total = exhibitions_part.article_set.order_by('create_time')[page * 4: (page + 1) * 4] or []
-    exhibitions_json = serialize("json", exhibitions_total)
-    return HttpResponse(exhibitions_json, content_type="application/json")
 
 
 @require_POST
@@ -43,9 +35,9 @@ def apply_appoint(request):
     return HttpResponse("预约成功!")
 
 
-def article(request, article_id):
+def article(request, part_name, article_id):
     try:
-        articles = Article.objects.get(id=article_id)
+        articles = Article.objects.get(id=article_id, part__name=part_name)
     except ObjectDoesNotExist:
         articles = None
     return render(request, 'core/article.html', {
@@ -55,14 +47,28 @@ def article(request, article_id):
 
 def part(request, part_name):
     page = request.GET.get('page') or 1
-    articles = Article.objects.filter(part__name=part_name)
-    paginator = Paginator(articles, MAX_ITEMS)
+    is_doc = False
     try:
+        if part_name == 'doc':
+            articles = Document.objects.all()
+            part_title = '在线文档'
+            is_doc = True
+        else:
+            articles = Article.objects.filter(part__name=part_name)
+            part_title = Part.objects.get(name=part_name).title
+        paginator = Paginator(articles, MAX_ITEMS)
         result = paginator.page(page)
     except PageNotAnInteger:
         result = paginator.page(1)
     except EmptyPage:
         result = paginator.page(paginator.num_pages)
+    except ObjectDoesNotExist:
+        return redirect('core:index')
     return render(request, 'core/part.html', {
-        articles: result
+        'is_doc': is_doc,
+        'part_name': part_name,
+        'part_title': part_title,
+        'articles': result,
+        'max_page': paginator.num_pages,
+        'views': paginator.count * 1089 + 5
     })

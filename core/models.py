@@ -12,7 +12,7 @@ class Part(models.Model):
 
 class Article(models.Model):
     part = models.ForeignKey(Part)
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length=50)
     desc = models.CharField(max_length=150, blank=True)
     content = models.TextField()
     create_time = models.DateTimeField(default=datetime.today())
@@ -41,3 +41,16 @@ class Appoint(models.Model):
 
     def __str__(self):
         return self.name + ' 的预约'
+
+
+class Document(models.Model):
+    title = models.CharField(max_length=60)
+    desc = models.CharField(max_length=160)
+    file = models.FileField(upload_to='documents/%Y/%m/%d/')
+    create_time = models.DateTimeField(default=datetime.today())
+
+    class Meta:
+        ordering = ['create_time']
+
+    def __str__(self):
+        return self.title

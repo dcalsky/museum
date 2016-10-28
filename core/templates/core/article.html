@@ -1,19 +1,31 @@
 {% extends 'common/layout.html' %}
 {% load staticfiles %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'core/styles/article.css'%}">
+    <link rel="stylesheet" href="{% static 'core/styles/article.css' %}">
 {% endblock %}
 
 {% block main %}
-    {% if article %}
-        <div id="article">
-            <h3>{{ article.title }}</h3>
-            <hr />
-            {{ article.content|safe }}
-        </div>
-    {% else %}
-        <div id="article">
-            <h1>没有这篇文章</h1>
-        </div>
-    {% endif %}
+
+    <section id="article" class="section">
+    <div class="container">
+        {% if article  %}
+            <div class="has-text-centered">
+                <h3 class="title is-2">{{ article.title }}</h3>
+                <h4 class="subtitle is-4">{{ article.desc }}</h4>
+            </div>
+            <hr  />
+            <div class="content">
+                {{ article.content | safe }}
+            </div>
+        {% else %}
+            <div class="content">
+                <h3 class="is-2">没有这篇文章</h3>
+                <a href="../">返回</a>
+            </div>
+
+        {% endif %}
+    </div>
+
+    </section>
+
 {% endblock %}
