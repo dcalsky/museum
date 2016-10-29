@@ -69,7 +69,6 @@
         <hr class="is-marginless"/>
     {% endif %}
     {% if guides %}
-
         <section class="section is-medium">
             <div class="container">
                 <a href="{% url 'core:part' 'guide' %}">
@@ -92,8 +91,49 @@
                 </div>
             </div>
         </section>
+        <hr class="is-marginless"/>
     {% endif %}
-    <hr class="is-marginless"/>
+    {% if exhibitions %}
+        <section class="section is-medium">
+            <div class="container">
+                <a href="{% url 'core:part' 'exhibition' %}">
+                    {% include 'core/_title.html' with title='网上巡展' %}
+                </a>
+                {% include 'core/_subtitle.html' with subtitle='在互联网文化中带来全新的体验' %}
+                <div class="columns">
+                    {% for item in exhibitions %}
+                        <div class="column is-3">
+                            <div class="card is-fullwidth">
+                                <a href="part/exhibition/{{ item.id }}">
+                                    <div class="card-image">
+                                        <figure class="image is-1by1">
+                                            <img src="{{ item.thumbnail.url }}" alt="">
+                                        </figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="media">
+                                            <div class="media-content">
+                                                <p class="title is-5"><strong>{{ item.title }}</strong></p>
+                                                {#<p class="subtitle is-6">已浏览: {{ item.page_view }}</p>#}
+                                            </div>
+                                        </div>
+
+                                        <div class="content">
+                                            {{ item.desc }}
+                                            <br>
+                                            <small>{{ item.create_time | date:"Y年m月d日H时" }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <hr class="is-marginless"/>
+    {% endif %}
     <section class="section is-medium">
         <div class="container">
             <div class="columns">
@@ -145,7 +185,7 @@
                                 <label class="label"></label>
                             </div>
                             <div class="control">
-                                <input type="submit" class="button is-success" value="提交预约" />
+                                <input type="submit" class="button is-success" value="提交预约"/>
                             </div>
 
                         </div>
@@ -155,47 +195,6 @@
         </div>
     </section>
     <hr class="is-marginless"/>
-    {% if exhibitions %}
-        <section class="section is-medium">
-            <div class="container">
-                <a href="{% url 'core:part' 'exhibition' %}">
-                    {% include 'core/_title.html' with title='网上巡展' %}
-                </a>
-                {% include 'core/_subtitle.html' with subtitle='在互联网文化中带来全新的体验' %}
-                <div class="columns">
-                    {% for item in exhibitions %}
-                        <div class="column is-3">
-                            <div class="card is-fullwidth">
-                                <a href="part/exhibition/{{ item.id }}">
-                                    <div class="card-image">
-                                        <figure class="image is-1by1">
-                                            <img src="{{ item.thumbnail.url }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-content">
-                                                <p class="title is-5"><strong>{{ item.title }}</strong></p>
-{#                                                <p class="subtitle is-6">已浏览: {{ item.page_view }}</p>#}
-                                            </div>
-                                        </div>
-
-                                        <div class="content">
-                                            {{ item.desc }}
-                                            <br>
-                                            <small>{{ item.create_time | date:"Y年m月d日H时" }}</small>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-        <hr class="is-marginless"/>
-    {% endif %}
     <section id="about" class="section is-medium">
         <div class="container">
             <a href="{% url 'core:part' 'about' %}">

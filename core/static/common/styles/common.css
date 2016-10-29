@@ -7,6 +7,10 @@ html {
   position: relative;
 }
 
+#header .nav {
+  font-size: 18px;
+}
+
 
 .nav-item img {
   max-height: 36px;
