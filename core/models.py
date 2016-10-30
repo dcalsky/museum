@@ -54,3 +54,11 @@ class Document(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Feedback(models.Model):
+    content = models.TextField()
+    create_time = models.DateTimeField(default=datetime.today())
+
+    class Meta:
+        ordering = ['create_time']

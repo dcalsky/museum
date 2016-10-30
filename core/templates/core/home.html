@@ -212,8 +212,8 @@
                                     aria-hidden="true"></i>地址: 中国 上海 四平路 1239号一二九大楼</span>
                         </p>
                     </div>
-                    <form action="" method="post" target="_blank">
-                        <input style="display: none" id="id_title" name="title" type="text" placeholder="标题"/>
+                    <form action="{% url 'core:feedback' %}" method="post" target="_blank">
+                        {% csrf_token %}
                         <textarea name="content" placeholder="意见与建议"></textarea>
                         <button type="submit">发送</button>
                     </form>

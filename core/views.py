@@ -4,7 +4,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.http import require_POST
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import Article, Part, Appoint, Document
+from .models import Article, Part, Appoint, Document, Feedback
 
 MAX_ITEMS = 10
 
@@ -75,3 +75,13 @@ def part(request, part_name):
         'max_page': paginator.num_pages,
         'views': paginator.count * 1089 + 5
     })
+
+
+def send_feedback(request):
+    content = request.POST.get('content')
+    if len(content) < 10:
+        return HttpResponse('意见反馈不能少于10个字！')
+    else:
+        feedback = Feedback(content=content)
+        feedback.save()
+        return HttpResponse('您的意见已经成功反馈！')
