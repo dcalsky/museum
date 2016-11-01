@@ -15,7 +15,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50)
     desc = models.CharField(max_length=150, blank=True)
     content = models.TextField()
-    create_time = models.DateTimeField(default=datetime.today())
+    create_time = models.DateTimeField(default=datetime.now())
     thumbnail = models.ImageField()
     secret = models.BooleanField(default=False)
     page_view = models.IntegerField(default=0)
@@ -25,6 +25,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_year(self):
+        return self.create_time.year
 
 
 class Appoint(models.Model):

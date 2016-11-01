@@ -5,6 +5,7 @@ from django.views.decorators.http import require_POST
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Article, Part, Appoint, Document, Feedback
+from datetime import datetime
 
 MAX_ITEMS = 10
 
@@ -14,11 +15,13 @@ def index(request):
     sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:5] or []
     exhibitions = Article.objects.filter(part__name='exhibition').order_by('create_time')[:4] or []
     guides = Article.objects.filter(part__name='guide').order_by('create_time')[:3] or []
+    this_year = datetime.now().year
     return render(request, 'core/home.html', {
         'news': news,
         'exhibitions': exhibitions,
         'sliders': sliders,
-        'guides': guides
+        'guides': guides,
+        'this_year': this_year
     })
 
 
@@ -50,6 +53,7 @@ def article(request, part_name, article_id):
 
 def part(request, part_name):
     page = request.GET.get('page') or 1
+    year = int(request.GET.get('year'))
     is_doc = False
     try:
         if part_name == 'doc':
@@ -57,7 +61,12 @@ def part(request, part_name):
             part_title = '在线文档'
             is_doc = True
         else:
-            articles = Article.objects.filter(part__name=part_name)
+            if not year:
+                articles = Article.objects.filter(part__name=part_name)
+            else:
+                end_year = datetime(year + 1, 1, 1)
+                start_year = datetime(year, 1, 1)
+                articles = Article.objects.filter(part__name=part_name, create_time__lt=end_year, create_time__gte=start_year)
             part_title = Part.objects.get(name=part_name).title
         paginator = Paginator(articles, MAX_ITEMS)
         result = paginator.page(page)

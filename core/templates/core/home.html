@@ -78,7 +78,14 @@
                 <div class="tile is-ancestor">
                     {% for item in guides %}
                         <div class="tile is-parent">
-                            <article class="tile is-child notification is-primary">
+                            <article class="tile is-child notification
+                                {% if forloop.counter == 1 %}
+                                    is-danger
+                                {% elif forloop.counter == 2 %}
+                                    is-info
+                                {% else %}
+                                    is-primary
+                                {% endif %}">
                                 <a href="part/guide/{{ item.id }}" class="content">
                                     <p class="title">{{ item.title }}</p>
                                     <div class="content">
@@ -100,7 +107,7 @@
                     {% include 'core/_title.html' with title='网上巡展' %}
                 </a>
                 {% include 'core/_subtitle.html' with subtitle='在互联网文化中带来全新的体验' %}
-                <div class="columns">
+                <div class="columns is-multiline">
                     {% for item in exhibitions %}
                         <div class="column is-3">
                             <div class="card is-fullwidth">
