@@ -12,7 +12,7 @@ MAX_ITEMS = 10
 
 def index(request):
     news = Article.objects.filter(part__name='news').order_by('create_time')[:3] or []
-    sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:5] or []
+    sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:4] or []
     exhibitions = Article.objects.filter(part__name='exhibition').order_by('create_time')[:4] or []
     guides = Article.objects.filter(part__name='guide').order_by('create_time')[:3] or []
     this_year = datetime.now().year
@@ -82,7 +82,7 @@ def part(request, part_name):
         'part_title': part_title,
         'articles': result,
         'max_page': paginator.num_pages,
-        'views': paginator.count * 1089 + 5
+        'views': paginator.count * 985
     })
 
 

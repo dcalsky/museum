@@ -12,7 +12,7 @@
                 <div class="columns is-vcentered">
                     <div class="column is-6">
                         {% include 'core/_title.html' with title='近期消息' %}
-                        {% include 'core/_subtitle.html' with subtitle='从这里开始了解来自馆内的新消息' %}
+                        {% include 'core/_subtitle.html' with subtitle='从这里开始了解来自馆内的新信息' %}
                     </div>
                     <div class="column">
                         <ul class="bxslider">
@@ -207,9 +207,9 @@
             <a href="{% url 'core:part' 'about' %}">
                 {% include 'core/_title.html' with title='关于我们' %}
             </a>
-            {% include 'core/_subtitle.html' with subtitle='直接向您展示的我们' %}
+            {% include 'core/_subtitle.html' with subtitle='直接向您展示自己的我们' %}
             <div id="about-main">
-                <img src="{% static "core/images/map.jpg" %}" alt="">
+                <img src="{% static "core/images/map.jpg" %}" alt="四平路校区地图" />
                 <div id="contract-board">
                     <div class="title"><span>联系我们</span></div>
                     <div class="info">
@@ -221,7 +221,7 @@
                     </div>
                     <form action="{% url 'core:feedback' %}" method="post" target="_blank">
                         {% csrf_token %}
-                        <textarea name="content" placeholder="意见与建议"></textarea>
+                        <textarea name="content" placeholder="请填写您对我们的意见与建议(字数不少于10)"></textarea>
                         <button type="submit">发送</button>
                     </form>
                 </div>
