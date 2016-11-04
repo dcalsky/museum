@@ -26,12 +26,18 @@
         <div class="container">
             <nav class="nav">
                 <div class="nav-left">
-                    <a class="nav-item is-brand" href="{% url 'core:index' %}">
-                        <img src="{% static 'common/images/tongji_logo.png' %}" alt="museum logo">
+                    <a class="nav-item" href="{% url 'core:index' %}">
+                        首页
                     </a>
+{#                    <a class="nav-item is-brand" href="{% url 'core:index' %}">#}
+{#                        <img src="{% static 'common/images/tongji_logo.png' %}" alt="museum logo">#}
+{#                    </a>#}
                 </div>
 
                 <div class="nav-center">
+                    <a id="about-link" class="nav-item" href="#about">
+                        联系我们
+                    </a>
                     <a class="nav-item" href="{% url 'core:part' 'exhibition' %}">
                         网上巡展
                     </a>
