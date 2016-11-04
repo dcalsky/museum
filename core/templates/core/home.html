@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="columns is-vcentered">
                     <div class="column is-6">
-                        {% include 'core/_title.html' with title='近期消息' %}
+                        {% include 'core/_title.html' with title='最新资讯' %}
                         {% include 'core/_subtitle.html' with subtitle='从这里开始了解来自馆内的新信息' %}
                     </div>
                     <div class="column">
@@ -36,7 +36,7 @@
                 <div class="columns is-vcentered">
                     <div class="column is-one-third">
                         <a href="{% url 'core:part' 'news' %}">
-                            {% include 'core/_title.html' with title='最新资讯' %}
+                            {% include 'core/_title.html' with title='新闻通告' %}
                         </a>
                         {% include 'core/_subtitle.html' with subtitle='文化动态可持续的共同关注' %}
                     </div>
@@ -108,34 +108,51 @@
                 </a>
                 {% include 'core/_subtitle.html' with subtitle='在互联网文化中带来全新的体验' %}
                 <div class="columns is-multiline">
-                    {% for item in exhibitions %}
-                        <div class="column is-3">
-                            <div class="card is-fullwidth">
-                                <a href="part/exhibition/{{ item.id }}">
-                                    <div class="card-image">
-                                        <figure class="image is-1by1">
-                                            <img src="{{ item.thumbnail.url }}" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-content">
-                                                <p class="title is-5"><strong>{{ item.title }}</strong></p>
-                                                {#<p class="subtitle is-6">已浏览: {{ item.page_view }}</p>#}
-                                            </div>
-                                        </div>
-
-                                        <div class="content">
-                                            {{ item.desc }}
-                                            <br>
-                                            <small>{{ item.create_time | date:"Y年m月d日H时" }}</small>
-                                        </div>
-                                    </div>
+                    {% for year in years %}
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification
+                                {% if forloop.counter == 1 %}
+                                    is-danger
+                                {% elif forloop.counter == 2 %}
+                                    is-info
+                                {% else %}
+                                    is-primary
+                                {% endif %}">
+                                <a href="part/exhibition?year={{ year }}" class="content">
+                                    <p class="title">{{ year }}年</p>
                                 </a>
-
-                            </div>
+                            </article>
                         </div>
                     {% endfor %}
+
+{#                    {% for item in exhibitions %}#}
+{#                        <div class="column is-3">#}
+{#                            <div class="card is-fullwidth">#}
+{#                                <a href="part/exhibition/{{ item.id }}">#}
+{#                                    <div class="card-image">#}
+{#                                        <figure class="image is-1by1">#}
+{#                                            <img src="{{ item.thumbnail.url }}" alt="">#}
+{#                                        </figure>#}
+{#                                    </div>#}
+{#                                    <div class="card-content">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-content">#}
+{#                                                <p class="title is-5"><strong>{{ item.title }}</strong></p>#}
+                                                {#<p class="subtitle is-6">已浏览: {{ item.page_view }}</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{##}
+{#                                        <div class="content">#}
+{#                                            {{ item.desc }}#}
+{#                                            <br>#}
+{#                                            <small>{{ item.create_time | date:"Y年m月d日H时" }}</small>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </a>#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
                 </div>
             </div>
         </section>

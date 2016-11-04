@@ -15,13 +15,13 @@ def index(request):
     sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:4] or []
     exhibitions = Article.objects.filter(part__name='exhibition').order_by('create_time')[:4] or []
     guides = Article.objects.filter(part__name='guide').order_by('create_time')[:3] or []
-    this_year = datetime.now().year
+    years = [datetime.now().year - 1, datetime.now().year, datetime.now().year +1]
     return render(request, 'core/home.html', {
         'news': news,
         'exhibitions': exhibitions,
         'sliders': sliders,
         'guides': guides,
-        'this_year': this_year
+        'years': years
     })
 
 
@@ -53,7 +53,7 @@ def article(request, part_name, article_id):
 
 def part(request, part_name):
     page = request.GET.get('page') or 1
-    year = int(request.GET.get('year'))
+    year = int(request.GET.get('year')) if request.GET.get('year') else None
     is_doc = False
     try:
         if part_name == 'doc':
