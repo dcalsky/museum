@@ -2,6 +2,16 @@
   max-width: 40%;
 }
 
+.is-blue {
+  color: white;
+  background: #0e3b94;
+}
+
+.is-orange {
+  color: white;
+  background: #e05418;
+}
+
 @media all and (max-device-width: 960px) {
   #about {
     display: none;
