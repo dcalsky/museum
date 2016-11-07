@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="nav-center">
-                    <a id="about-link" class="nav-item" href="#about">
+                    <a class="nav-item" href="{% url 'core:part' 'about' %}">
                         联系我们
                     </a>
                     <a class="nav-item" href="{% url 'core:part' 'exhibition' %}">
@@ -45,7 +45,7 @@
                         参观引导
                     </a>
                     <a class="nav-item" href="{% url 'core:part' 'news' %}">
-                        最新咨询
+                        新闻通告
                     </a>
                     <a class="nav-item" href="{% url 'core:part' 'doc' %}">
                         文档中心

@@ -80,11 +80,11 @@
                         <div class="tile is-parent">
                             <article class="tile is-child notification
                                 {% if forloop.counter == 1 %}
-                                    is-danger
+                                    is-blue
                                 {% elif forloop.counter == 2 %}
-                                    is-info
+                                    is-orange
                                 {% else %}
-                                    is-primary
+                                    is-dark
                                 {% endif %}">
                                 <a href="part/guide/{{ item.id }}" class="content">
                                     <p class="title">{{ item.title }}</p>
