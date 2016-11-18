@@ -14,7 +14,7 @@ def index(request):
     news = Article.objects.filter(part__name='news')[:3] or []
     sliders = Article.objects.filter(part__name='slider')[:4] or []
     exhibitions = Article.objects.filter(part__name='exhibition')[:4] or []
-    guides = Article.objects.filter(part__name='guide')[:3] or []
+    guides = Article.objects.filter(part__name='guide')[2::-1] or []
     years = [datetime.now().year - 1, datetime.now().year, datetime.now().year +1]
     return render(request, 'core/home.html', {
         'news': news,
