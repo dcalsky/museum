@@ -7,14 +7,14 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Article, Part, Appoint, Document, Feedback
 from datetime import datetime
 
-MAX_ITEMS = 10
+MAX_ITEMS = 9
 
 
 def index(request):
-    news = Article.objects.filter(part__name='news').order_by('create_time')[:3] or []
-    sliders = Article.objects.filter(part__name='slider').order_by('create_time')[:4] or []
-    exhibitions = Article.objects.filter(part__name='exhibition').order_by('create_time')[:4] or []
-    guides = Article.objects.filter(part__name='guide').order_by('create_time')[:3] or []
+    news = Article.objects.filter(part__name='news')[:3] or []
+    sliders = Article.objects.filter(part__name='slider')[:4] or []
+    exhibitions = Article.objects.filter(part__name='exhibition')[:4] or []
+    guides = Article.objects.filter(part__name='guide')[:3] or []
     years = [datetime.now().year - 1, datetime.now().year, datetime.now().year +1]
     return render(request, 'core/home.html', {
         'news': news,
