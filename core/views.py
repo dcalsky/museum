@@ -14,8 +14,8 @@ def index(request):
     news = Article.objects.filter(part__name='news')[:3] or []
     sliders = Article.objects.filter(part__name='slider')[:4] or []
     exhibitions = Article.objects.filter(part__name='exhibition')[:4] or []
-    guides = Article.objects.filter(part__name='guide')[2::-1] or []
-    years = [datetime.now().year - 1, datetime.now().year, datetime.now().year +1]
+    guides = Article.objects.filter(part__name='guide').order_by('create_time')[:3] or []
+    years = [datetime.now().year - 1, datetime.now().year, datetime.now().year + 1]
     return render(request, 'core/home.html', {
         'news': news,
         'exhibitions': exhibitions,
@@ -27,7 +27,8 @@ def index(request):
 
 @require_POST
 def apply_appoint(request):
-    if request.POST.get('name') and request.POST.get('phone') and request.POST.get('time') and request.POST.get('amount'):
+    if request.POST.get('name') and request.POST.get('phone') and request.POST.get('time') and request.POST.get(
+            'amount'):
         appoint = Appoint(
             name=request.POST.get('name'),
             phone=request.POST.get('phone'),
@@ -66,7 +67,8 @@ def part(request, part_name):
             else:
                 end_year = datetime(year + 1, 1, 1)
                 start_year = datetime(year, 1, 1)
-                articles = Article.objects.filter(part__name=part_name, create_time__lt=end_year, create_time__gte=start_year)
+                articles = Article.objects.filter(part__name=part_name, create_time__lt=end_year,
+                                                  create_time__gte=start_year)
             part_title = Part.objects.get(name=part_name).title
         paginator = Paginator(articles, MAX_ITEMS)
         result = paginator.page(page)
