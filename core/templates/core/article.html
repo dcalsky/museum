@@ -10,10 +10,10 @@
     <div class="container">
         {% if article  %}
             <div class="has-text-centered">
-                <h3 class="title is-2">{{ article.title }}</h3>
-                <h4 class="subtitle is-4">{{ article.desc }}</h4>
+                <h3 class="title is-3">{{ article.title }}</h3>
+                <h4 class="subtitle is-5">{{ article.desc }}</h4>
             </div>
-            <hr  />
+            <hr/>
             <div class="content">
                 {{ article.content | safe }}
             </div>

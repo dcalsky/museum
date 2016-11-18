@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Article, Part, Appoint, Document, Feedback
 from datetime import datetime
 
-MAX_ITEMS = 9
+MAX_ITEMS = 6
 
 
 def index(request):
