@@ -21,7 +21,7 @@ class Article(models.Model):
     page_view = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ['create_time']
+        ordering = ['-create_time']
 
     def __str__(self):
         return self.title
@@ -53,7 +53,7 @@ class Document(models.Model):
     create_time = models.DateTimeField(default=datetime.today())
 
     class Meta:
-        ordering = ['create_time']
+        ordering = ['-create_time']
 
     def __str__(self):
         return self.title
@@ -64,4 +64,4 @@ class Feedback(models.Model):
     create_time = models.DateTimeField(default=datetime.today())
 
     class Meta:
-        ordering = ['create_time']
+        ordering = ['-create_time']
