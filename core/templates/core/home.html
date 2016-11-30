@@ -7,7 +7,7 @@
 
 {% block main %}
     {% if sliders %}
-        <section class="section is-medium">
+        <section class="section is-small">
             <div class="container">
                 <div class="columns is-vcentered">
                     <div class="column is-6">
@@ -31,7 +31,7 @@
         <hr class="is-marginless"/>
     {% endif %}
     {% if news %}
-        <section class="section is-medium">
+        <section class="section is-small">
             <div class="container">
                 <div class="columns is-vcentered">
                     <div class="column is-one-third">
@@ -101,7 +101,7 @@
         <hr class="is-marginless"/>
     {% endif %}
     {% if exhibitions %}
-        <section class="section is-medium">
+        <section class="section is-small">
             <div class="container">
                 <a href="{% url 'core:part' 'exhibition' %}">
                     {% include 'core/_title.html' with title='网上巡展' %}
@@ -219,7 +219,7 @@
         </div>
     </section>
     <hr class="is-marginless"/>
-    <section id="about" class="section is-medium">
+    <section id="about" class="section is-small">
         <div class="container">
             <a href="{% url 'core:part' 'about' %}">
                 {% include 'core/_title.html' with title='关于我们' %}
