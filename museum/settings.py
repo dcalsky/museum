@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'museum.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'museum_tj',
-        'USER': 'dcalsky',
-        'PASSWORD': 'react',
+        'NAME': 'postgres',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': '',  # default is better
         'PORT': '5432',
     }
