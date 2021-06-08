@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 django-summernote = "==0.8.11.1"
-pillow = "==6.2.1"
+pillow = "==8.2.0"
 "psycopg2-binary" = "*"
 uwsgi = "==2.0.14"
 Django = "==1.10.2"
